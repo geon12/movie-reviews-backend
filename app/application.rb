@@ -11,7 +11,8 @@ class Application
       return [
         200, 
         content_type, 
-        [ movies.to_json ]
+        [movies.as_json(methods: :average_rating).to_json]
+        #[ movies.to_json ]
       ]
 
     elsif req.path.match('/movies/') && req.post?
@@ -38,7 +39,8 @@ class Application
       return [
         200,
         content_type,
-        [reviewers.to_json]
+        [reviewers.as_json(methods: :total_likes).to_json]
+        #[reviewers.to_json]
       ]
 
     elsif req.path.match('/reviewers') && req.post?
