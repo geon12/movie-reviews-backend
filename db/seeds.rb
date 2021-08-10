@@ -27,7 +27,7 @@ end
 
 Reviewer.all.each do |reviewer|
     movies = Movie.all.sample(rand(30..50)) 
-    movies.each {|movie| MovieReview.create(reviewer:reviewer,movie:movie,likes:rand(0..50),rating:rand(1..10), review:Faker::Lorem.paragraphs)}
+    movies.each {|movie| MovieReview.create(reviewer:reviewer,movie:movie,likes:rand(0..50),rating:rand(1..10), review:Faker::Lorem.paragraph(sentence_count: 3))}
 end
 
 puts "Done seeding"
