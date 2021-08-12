@@ -32,6 +32,17 @@ class Application
       rescue
         return [404, content_type, [{message: "Movie not found"}.to_json]]
       end
+
+    elsif req.path.match('/movies/') && req.patch?
+      id = req.path.split('/')[2]
+      body = JSON.parse(req.body.read)
+      begin
+        movie = Movie.find(id)
+        movie.update(body)
+        return [202, content_type, [movie.to_json]]
+      rescue
+        return [404, content_type, [{message: "Movie not found"}.to_json]]
+      end
     
 
     elsif req.path == '/reviewers' && req.get?
@@ -56,6 +67,17 @@ class Application
       begin
         reviewer = Reviewer.find(id)
         return [200, content_type, [reviewer.as_json(include: :movie_reviews).to_json] ]
+      rescue
+        return [404, content_type, [{message: "Reviewer not found"}.to_json]]
+      end
+
+    elsif req.path.match('/reviewers/') && req.patch?
+      id = req.path.split('/')[2]
+      body = JSON.parse(req.body.read)
+      begin
+        reviewer = Reviewer.find(id)
+        reviewer.update(body)
+        return [202, content_type, [reviewer.to_json]]
       rescue
         return [404, content_type, [{message: "Reviewer not found"}.to_json]]
       end
@@ -90,6 +112,7 @@ class Application
       begin
         movie_review = MovieReview.find(id)
         movie_review.update(body)
+        return [202, content_type, [movie_review.to_json]]
       rescue
         return [404, content_type, [{message: "Movie Review not found"}.to_json]]
       end
