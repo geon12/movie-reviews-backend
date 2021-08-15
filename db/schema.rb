@@ -12,12 +12,15 @@
 
 ActiveRecord::Schema.define(version: 2021_08_09_003331) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "movie_reviews", force: :cascade do |t|
     t.integer "rating"
     t.string "review"
     t.integer "likes"
-    t.integer "movie_id"
-    t.integer "reviewer_id"
+    t.bigint "movie_id"
+    t.bigint "reviewer_id"
     t.index ["movie_id"], name: "index_movie_reviews_on_movie_id"
     t.index ["reviewer_id"], name: "index_movie_reviews_on_reviewer_id"
   end
@@ -35,4 +38,6 @@ ActiveRecord::Schema.define(version: 2021_08_09_003331) do
     t.string "outlet"
   end
 
+  add_foreign_key "movie_reviews", "movies"
+  add_foreign_key "movie_reviews", "reviewers"
 end

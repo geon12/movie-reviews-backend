@@ -1,5 +1,13 @@
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
+  adapter: postgresql
+  database: movie-reviews-development
+  pool: 5
+  timeout: 5000
+  username: postgres
+  password: password
+
+production:
+  adapter: postgresql
+  database: movie-reviews-production
   pool: 5
   timeout: 5000
