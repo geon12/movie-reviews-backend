@@ -6,7 +6,7 @@ Movie.destroy_all
 Reviewer.destroy_all
 
 
-movie_data= CSV.read("../IMDb_movies.csv")
+movie_data= CSV.read("./IMDb_movies.csv")
 movie_data = movie_data.filter {|movie| movie[7] == 'USA' && movie[3].to_i >= 1970}
 movie_data = movie_data.sample(250)
 
