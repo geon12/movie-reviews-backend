@@ -12,7 +12,7 @@ class Application
         200, 
         content_type, 
         [movies.as_json(methods: :average_rating).to_json]
-        #[ movies.to_json ]
+        
       ]
 
     elsif req.path.match('/movies/') && req.post?
@@ -127,19 +127,6 @@ class Application
       rescue
         return [404, content_type, [{message: "Movie Review not found"}.to_json]]
       end
-    
-    # elsif req.path.match('/movies?name=') && req.get?
-    #   query = req.path.split('name=')[1]
-    #   movie = Movie.find_by(name: query)
-    #   if movie
-    #     return  [
-    #       200, 
-    #       content_type, 
-    #       [ movie.to_json ]
-    #     ]
-    #   else
-    #     return [404, content_type, [{message: "Movie not found"}.to_json]]
-    #   end
 
     else
       return [404, content_type, [ {:message => "Path not Found"}.to_json ]]
